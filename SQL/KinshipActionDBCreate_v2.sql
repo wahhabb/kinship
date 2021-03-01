@@ -20,17 +20,17 @@ USE KinshipAction ;
 # First drop tables if they exist to start clean
 # Drop the tables that have foreign keys first
 
-DROP TABLE IF EXISTS GroupEvent ;
+DROP TABLE IF EXISTS groupevent ;
 
-DROP TABLE IF EXISTS GroupIssue ;
+DROP TABLE IF EXISTS groupissue ;
 
-DROP TABLE IF EXISTS EventIssue ;
+DROP TABLE IF EXISTS eventissue ;
 
-DROP TABLE IF EXISTS KGroup ;
+DROP TABLE IF EXISTS kgroup ;
 
-DROP TABLE IF EXISTS KEvent ;
+DROP TABLE IF EXISTS kevent ;
 
-DROP TABLE IF EXISTS Issue ;
+DROP TABLE IF EXISTS issue ;
 
 
 # Create tables
@@ -38,7 +38,7 @@ DROP TABLE IF EXISTS Issue ;
 # after the parent tables
 
 
-CREATE TABLE KGroup (
+CREATE TABLE kgroup (
 Name   VARCHAR(255) NOT NULL ,
 Description   VARCHAR(255) ,
 Website   VARCHAR(255) ,
@@ -62,7 +62,7 @@ PRIMARY KEY (Name)
 
 
 
-CREATE TABLE KEvent (
+CREATE TABLE kevent (
 Name   VARCHAR(255) NOT NULL ,
 Description   VARCHAR(255) ,
 Begin   DATETIME ,
@@ -82,7 +82,7 @@ PRIMARY KEY (Name)
 ) Engine=InnoDB ;
 
 
-CREATE TABLE Issue (
+CREATE TABLE issue (
 Name   VARCHAR(255) NOT NULL ,
 Description   VARCHAR(255) ,
 PRIMARY KEY (Name)
@@ -90,45 +90,47 @@ PRIMARY KEY (Name)
 
 
 
-CREATE TABLE GroupEvent (
+CREATE TABLE groupevent (
 GroupName   VARCHAR(255) NOT NULL ,
 EventName   VARCHAR(255) NOT NULL ,
 PRIMARY KEY (GroupName, EventName) ,
-FOREIGN KEY (GroupName) REFERENCES KGroup (Name)
+CONSTRAINT GroupName_fk
+FOREIGN KEY (GroupName) REFERENCES kgroup (Name)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE ,
-FOREIGN KEY (EventName) REFERENCES KEvent (Name) 
+CONSTRAINT EventName_fk
+FOREIGN KEY (EventName) REFERENCES kevent (Name) 
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 ) Engine=InnoDB ;
 
 
 
-CREATE TABLE GroupIssue (
+CREATE TABLE groupissue (
 GroupName   VARCHAR(255) NOT NULL ,
 IssueName   VARCHAR(255) NOT NULL ,
 PRIMARY KEY (GroupName, IssueName) ,
-CONSTRAINT GroupName_fk
-FOREIGN KEY (GroupName) REFERENCES KGroup (Name)
+CONSTRAINT GroupName_fk1
+FOREIGN KEY (GroupName) REFERENCES kgroup (Name)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE ,
-CONSTRAINT IssueName_fk
-FOREIGN KEY (IssueName) REFERENCES Issue (Name) 
+CONSTRAINT IssueName_fk1
+FOREIGN KEY (IssueName) REFERENCES issue (Name) 
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 ) Engine=InnoDB ;
 
 
-CREATE TABLE EventIssue (
+CREATE TABLE eventissue (
 EventName   VARCHAR(255) NOT NULL ,
 IssueName   VARCHAR(255) NOT NULL ,
 PRIMARY KEY (EventName, IssueName) ,
-CONSTRAINT EventName_fk
-FOREIGN KEY (EventName) REFERENCES KEvent (Name)
+CONSTRAINT EventName_fk2
+FOREIGN KEY (EventName) REFERENCES kevent (Name)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE ,
-CONSTRAINT IssueName1_fk
-FOREIGN KEY (IssueName) REFERENCES Issue (Name) 
+CONSTRAINT IssueName_fk2
+FOREIGN KEY (IssueName) REFERENCES issue (Name) 
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 ) Engine=InnoDB ;

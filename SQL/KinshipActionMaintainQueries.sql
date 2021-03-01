@@ -1,16 +1,12 @@
--- ---------------------------------------------------------------------------
+##############################################################################
 -- Queries to populate KinshipAction tables                                  -
---                                                                          -
+--                                                                           -
 -- Numbers refer to use cases for traceability                               -
---                                                                          -
+--                                                                           -
 -- This is NOT meant to be run straight through as a script.                 -
 -- Use these queries as templates for queries submitted through the website. -
---                                                                          -
--- ---------------------------------------------------------------------------
-
--- ----------------------------------------------
---   Maintain - Create, update, delete
--- ----------------------------------------------
+--                                                                           -
+##############################################################################
 
 -- -----------------------
 -- 
@@ -24,7 +20,7 @@
 
 -- 2.5.1 - Create issue
 
-INSERT INTO Issue (Name, Description)
+INSERT INTO issue (Name, Description)
 VALUES ('Ageism',''),
 ('Air','air quality'),
 ('Animal protection','animal welfare, cruelty, vegetarianism, etc.'),
@@ -48,14 +44,14 @@ VALUES ('Ageism',''),
 
 -- 2.5.2 - Update issue
 
-UPDATE Issue 
+UPDATE issue 
    SET Description = "Discrimination against both old and young. Any discrimination on the basis of age."
    WHERE Name = 'Ageism';
 
 
 -- 2.5.3 - Delete issue
 
-DELETE FROM Issue
+DELETE FROM issue
  WHERE Name = 'Ageism' ;
 
 
@@ -65,10 +61,9 @@ DELETE FROM Issue
 -- 
 -- --------------------------
 
-
 -- 2.4.1 - Create action group
 
-INSERT INTO KGroup VALUES (
+INSERT INTO kgroup VALUES (
 'Org1',
 'The first organization',
 'https://xyzzy.com/',
@@ -89,7 +84,7 @@ INSERT INTO KGroup VALUES (
 -122.306862
 );
 
-INSERT INTO KGroup VALUES (
+INSERT INTO kgroup VALUES (
 'Org2',
 'The first organization',
 'https://xyzzy.com/',
@@ -110,7 +105,7 @@ INSERT INTO KGroup VALUES (
 0
 );
 
-INSERT INTO KGroup VALUES (
+INSERT INTO kgroup VALUES (
 'Org3',
 'The third organization',
 'https://xyzzy.com/',
@@ -133,21 +128,21 @@ INSERT INTO KGroup VALUES (
 
 -- 2.4.2 - Update action group
 
-UPDATE KGroup 
+UPDATE kgroup 
    SET Description = "The second organization"
    WHERE Name = "Org2";
 
 
 -- 2.4.3 - Delete action group
 
-DELETE FROM KGroup 
+DELETE FROM kgroup 
    WHERE Name = "Org3";
 
 
 
 -- -----------------------------------------------------
 -- 
--- Maintain GroupIssue
+-- Maintain groupissue
 -- 
 -- 2.4.1 - Create action group
 -- This assigns issues to an action group as part of the 
@@ -155,28 +150,28 @@ DELETE FROM KGroup
 -- 
 -- -----------------------------------------------------
 
-INSERT INTO GroupIssue (GroupName, IssueName) VALUES
+INSERT INTO groupissue (GroupName, issueName) VALUES
  ('Org1','Air') ,
  ('Org1','Elections')
 ;
 
-INSERT INTO GroupIssue (GroupName, IssueName) VALUES
+INSERT INTO groupissue (GroupName, issueName) VALUES
  ('Org2','Air') ,
  ('Org2','Elections') ,
  ('Org2','Other')
 ;
 
-INSERT INTO GroupIssue (GroupName, IssueName) VALUES
+INSERT INTO groupissue (GroupName, issueName) VALUES
  ('Org3','Permaculture') ,
  ('Org3','Sustainable Farming')
 ;
 
--- Update GroupIssue
+-- Update groupissue
 -- Don't update the table as such. Delete and add rows as needed.
 
--- Delete from GroupIssue
+-- Delete from groupissue
 
-DELETE FROM GroupIssue
+DELETE FROM groupissue
  WHERE Groupname = 'Org3' ;
 
 
@@ -193,7 +188,7 @@ DELETE FROM GroupIssue
 
 -- 2.3.1 - Create Event
 
-INSERT INTO KEvent VALUES (
+INSERT INTO kevent VALUES (
 "Eating S'Mores",  # Note - if value contains single quote, use double quotes around it.
 'Just a fun group activity involving graham crackers, marshmallows, chocolate and heat',
 '2021-03-01 13:00:00',
@@ -211,7 +206,7 @@ INSERT INTO KEvent VALUES (
 ''
 ) ;
 
-INSERT INTO KEvent VALUES (
+INSERT INTO kevent VALUES (
 "Pacific Climate Warriors at the First People's Climate Summit Evening Panel",
 'We invite you to join us at the events and activities 350.org is involved in at Bonn, or contact us for more information and media materials related to these events.',
 '2021-04-02 20:00:00',
@@ -229,9 +224,27 @@ INSERT INTO KEvent VALUES (
 );
 
 
-INSERT INTO KEvent VALUES (
+INSERT INTO kevent VALUES (
 'Event3',
 'We invite you to join us.',
+'2021-04-02 20:00:00',
+'2021-04-02 22:00:00',
+-5 ,
+'PST' ,
+'Wahhab Baldwin',
+'wahhabb@gmail.com',
+'+1 (206) 973-6751',
+'Yes',
+'',
+'https://us02web.zoom.us/j/84620810012?pwd=MEtVWVdwaDU3eFpoQVA0NnMzQTMrZz09',
+'Online',
+30.149748 ,
+-97.814468
+);
+
+INSERT INTO kevent VALUES (
+'Event4',
+'A big fat event',
 '2021-04-02 20:00:00',
 '2021-04-02 22:00:00',
 -5 ,
@@ -250,18 +263,18 @@ INSERT INTO KEvent VALUES (
 
 -- 2.3.2 - Update events
 
-UPDATE KEvent SET End = '2021-04-02 22:30:00' 
+UPDATE kevent SET End = '2021-04-02 22:30:00' 
  WHERE Name = 'Event3' ;
 
 -- 2.3.3 - Delete events
 
-DELETE FROM KEvent
+DELETE FROM kevent
  WHERE Name = 'Event3' ;
 
 
 -- ---------------------------------------------------
 -- 
--- Maintain GroupEvent
+-- Maintain groupevent
 -- 
 -- 2.3.1 - Create Event
 -- This assigns action groups to events as part of the 
@@ -269,44 +282,49 @@ DELETE FROM KEvent
 -- 
 -- ---------------------------------------------------
 
-INSERT INTO GroupEvent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName) VALUES (
 'Org1',
 "Eating S'Mores"
 ) ;
 
-INSERT INTO GroupEvent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName) VALUES (
 'Org3',
 "Eating S'Mores"
 ) ;
 
-INSERT INTO GroupEvent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName) VALUES (
 'Org2',
 "Pacific Climate Warriors at the First People's Climate Summit Evening Panel"
 ) ;
 
-INSERT INTO GroupEvent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName) VALUES (
 'Org2',
 "Event3"
 ) ;
 
-INSERT INTO GroupEvent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName) VALUES (
 'Org1',
 "Event3"
 ) ;
 
+INSERT INTO groupevent (GroupName,EventName) VALUES (
+'Org1',
+"Event4"
+) ;
 
--- Update GroupEvent
+
+-- Update groupevent
 -- Don't update the table as such. Delete and add rows as needed.
 
--- Delete from GroupEvent
+-- Delete from groupevent
 
-DELETE FROM GroupEvent
+DELETE FROM groupevent
  WHERE Groupname = 'Org3' ;
 
 
 -- ---------------------------------------------------
 -- 
--- Maintain EventIssue
+-- Maintain Eventissue
 -- 
 -- 2.3.1 - Create Event
 -- This assigns issues to events as part of the 
@@ -314,67 +332,33 @@ DELETE FROM GroupEvent
 -- 
 -- ---------------------------------------------------
 
-INSERT INTO EventIssue (EventName,IssueName) VALUES (
+INSERT INTO Eventissue (EventName,issueName) VALUES (
 "Eating S'Mores",
 'Elections'
 ) ;
 
-INSERT INTO EventIssue (EventName,IssueName) VALUES (
+INSERT INTO Eventissue (EventName,issueName) VALUES (
 "Eating S'Mores",
 'Feminism'
 ) ;
 
-INSERT INTO EventIssue (EventName,IssueName) VALUES (
+INSERT INTO Eventissue (EventName,issueName) VALUES (
 "Pacific Climate Warriors at the First People's Climate Summit Evening Panel",
 'Climate Change'
 ) ;
 
-INSERT INTO EventIssue (EventName,IssueName) VALUES (
+INSERT INTO Eventissue (EventName,issueName) VALUES (
 'Event3',
 'Indigenous'
 ) ;
 
-INSERT INTO EventIssue (EventName,IssueName) VALUES (
+INSERT INTO Eventissue (EventName,issueName) VALUES (
 'Event3',
 'Land'
 ) ;
 
-
-
--- ----------------------------------------------
---   Display data
--- ----------------------------------------------
-
--- -----------------------
--- 
--- 2.1 Find events
--- 
--- -----------------------
-
--- 2.1.1 - Find Events
-
--- 2.2.2 - Sort Events
-
--- 2.1.3 - View Specific KEvent
-
-SELECT KEvent.*, GroupEvent.GroupName FROM KEvent, GroupEvent
- WHERE KEvent.Name = 'Event3'
-   AND GroupEvent.EventName = KEvent.Name ;
-
-SELECT KEvent.Name, KEvent.Begin, GroupEvent.GroupName FROM KEvent, GroupEvent
- WHERE KEvent.Name = 'Event3'
-   AND GroupEvent.EventName = KEvent.Name ;
-
-SELECT KEvent.Name, KEvent.Begin, GroupEvent.GroupName
-  FROM KEvent INNER JOIN GroupEvent
-    ON GroupEvent.EventName = KEvent.Name
- WHERE KEvent.Name = 'Event3'
- ;
-
--- 2.2.1 - Find Action Groups
-
--- 2.2.2 - Sort Action Groups
-
--- 2.1.3 - View Specific Action Group
-
+INSERT INTO Eventissue (EventName,issueName) VALUES (
+'Event4',
+'Land'
+) ;
 
