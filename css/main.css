@@ -37,6 +37,11 @@ header h1 {
   color: white;
   padding-top: 0.5em;
 }
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
 
 nav a {
   text-decoration: none;
@@ -142,7 +147,21 @@ textarea:focus {
   /* Additional highlight for focused elements */
   border-color: #000;
 }
-
+.checkboxlist {
+  list-style: none;
+}
+.checkboxlist input {
+  width: fit-content;
+}
+.checkboxlist label {
+  text-align: left;
+  width: fit-content;
+}
+.checkboxlist div {
+  display: inline-block;
+  width: 200px;
+  float: left;
+}
 textarea {
   /* Align multiline text fields with their labels */
   vertical-align: top;

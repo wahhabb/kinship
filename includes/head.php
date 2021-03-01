@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
-<title>Enter a Kinship Group  </title>
+<title><?php echo $title ?></title>
 <link rel="stylesheet" href="css/main.css">
 <header>
-<h1>Organization List</h1>
+<h1><?php echo $title ?></h1>
 <nav role="navigation">
   <ul>
     <li><a href="#">Events</a></li>

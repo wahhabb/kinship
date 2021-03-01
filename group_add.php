@@ -1,5 +1,4 @@
 <?php
-require 'includes/head.php';
 
 // This function will run within each post array including multi-dimensional arrays
 function ExtendedAddslash(&$params){
@@ -7,6 +6,24 @@ function ExtendedAddslash(&$params){
         // check if $var is an array. If yes, it will start another ExtendedAddslash() function to loop to each key inside.
         is_array($var) ? ExtendedAddslash($var) : $var=addslashes($var);
     }
+}
+function Deblank($str) {
+    return str_replace(" ", "^^", $str);
+}
+function Reblank($str) {
+    return str_replace("^^", " ", $str);
+}
+
+$title = "Enter a Kinship Group";
+require 'includes/head.php';
+
+$issueNames = [];
+$issueDescs = [];
+$sql2 = "SELECT * FROM Issue;";
+$result = $conn->query($sql2);
+while($row = $result->fetch_assoc()) {
+    array_push($issueNames, $row["Name"]);
+    array_push($issueDescs, $row["Description"]);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -32,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pCountry = $_POST['pCountry'];
     
     $sql =
-        "INSERT INTO `ACTIONGROUP` (`Name`, `Description`, Website, MissionStatement,
+        "INSERT INTO `KGroup` (`Name`, `Description`, Website, MissionStatement,
         ResourcesNeeded, OrgType, ContactPerson, ContactEmail, ContactPhone,
         TextOK, Address1, Address2, City, StateProvince, PostalCode, Country)
         VALUES ('$pName', '$pDescription', '$pWebsite', '$pMissionStatement', 
@@ -43,37 +60,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (! $conn->query($sql))
         echo("Got an Error!! --" . $conn->error);
-    else
+    else {
+        // print_r([$_POST['pName'], $_POST['iss_Air'], isset( $_POST['iss_' . $issueNames[0]])]);
+        foreach ($issueNames as $issueName) {
+            if ( $_POST[Deblank($issueName)] ) {
+                $sql2 = "INSERT INTO GroupIssue (`GroupName`, `IssueName`) VALUES (" .
+                "'" . $pName . "', " . "'" . $issueName . "');";
+                if (! $conn->query($sql2))
+                    echo("Got an Error!! --" . $conn->error);
+            }
+        }
         echo "<p><b>SUCCESS! </b>Entry for " . $pName . " successfully added.</p><p></p>";
+    }
 }    
 
 ?>
 
-<form action="group_add.php" method="post">
+<h2>Kinship Wheels - Action Groups</h2>
+<p>If you have formed a new wheel that is based on location or affinity/cause, or if 
+    you have an organization or social action group you are already working with - please 
+    fill out this form so that we can add it to our collaborative database</p>
+
+<form action="group_add.php" method="post" id="add_group">
 <p>Fields marked with an asterisk <span style="color:red;">*</span> are required.</p>
 <ul>
 <li>
     <label for="pname">Organization Name: <span>*</span></label>
     <input type="text" name="pName" name="pName" required />
 </li>
+<p>Please give the name of your wheel or action group</p>
 <li>
-    <label for="pname">Description: <span>*</span></label>
+    <label for="pDescription">Description: <span>*</span></label>
     <input type="text" name="pDescription" name="pDescription" required />
 </li>
 <li>
-    <label for="pname">Website: <span>*</span></label>
+    <label for="pWebsite">Website: <span>*</span></label>
     <input type="text" name="pWebsite" name="pWebsite" required />
 </li>
 <li>
-    <label for="pname">Mission Statement: <span>*</span></label>
+    <label for="pMissionStatement">Mission Statement: <span>*</span></label>
     <textarea id="pMissionStatement" name="pMissionStatement" ></textarea>
 </li>
 <li>
-    <label for="pname">Resources Needed: <span>*</span></label>
+    <label for="pResourcesNeeded">Resources Needed or Requested: <span>*</span></label>
     <textarea type="text" id="pResourcesNeeded" name="pResourcesNeeded" ></textarea>
 </li>
+<p>What does your organization need &mdash; e.g. people with certain expertise,
+    volunteers, funding, tools, furniture, etc.</p>
 <li>
-    <label for="pname">Organization Type: <span>*</span></label>
+    <label for="pOrgType">Organization Type: <span>*</span></label>
     <select id="pOrgType"  name="pOrgType" >
         <option value="">--Please choose an option--</option>
         <option value="Local">Local</option>
@@ -84,50 +119,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </select>
 </li>
 <li>
-    <label for="pname">Contact Person: </label>
+    <label for="pContactPerson">Contact Person: </label>
     <input type="text" name="pContactPerson" name="pContactPerson" />
 </li>
 <li>
-    <label for="pname">Contact Email: </label>
+    <label for="pContactEmail">Contact Email: </label>
     <input type="email" id="pContactEmail" name="pContactEmail" />
 </li>
 <li>
-    <label for="pname">Contact Phone: </label>
+    <label for="pContactPhone">Contact Phone: </label>
     <input type="tel" id="pContactPhone" name="pContactPhone" />
 </li>
 <li>
-    <label for="pname">Text OK?: <span>*</span></label>
+    <label for="pTextOK">Text OK?: <span>*</span></label>
     <select id="pTextOK" name="pTextOK">
-        <option value="">--se choose an option--</option>
+        <option value="">--Please choose an option--</option>
         <option value="Yes">Yes</option>
         <option value="No">No</option>
-        <option value="Hybrid (online and in person)>Hybrid (online and in person)"</option>
+        <option value="Hybrid (online and in person)">Hybrid (online and in person)</option>
     </select>
 </li>
 <li>
-    <label for="pname">Address: <span>*</span></label>
+    <label for="pAddress1">Address: <span>*</span></label>
     <input type="text" name="pAddress1" required />
 </li>
 <li>
-    <label for="pname">Address Line 2: </label>
+    <label for="pAddress2">Address Line 2: </label>
     <input type="text" name="pAddress2" />
 </li>
 <li>
-    <label for="pname">City: <span>*</span></label>
+    <label for="pCity">City: <span>*</span></label>
     <input type="text" name="pCity" required />
 </li>
 <li>
-    <label for="pname">State or Province: <span>*</span></label>
+    <label for="pStateProvince">State or Province: <span>*</span></label>
     <input type="text" name="pStateProvince" required />
 </li>
 <li>
-    <label for="pname">Postal Code: <span>*</span></label>
+    <label for="pPostalCode">Postal Code: <span>*</span></label>
     <input type="text" name="pPostalCode" required />
 </li>
 <li>
-    <label for="pname">Country: <span>*</span></label>
+    <label for="pCountry">Country: <span>*</span></label>
     <input type="text" name="pCountry" required />
 </li>
+<h3>Issue or Affinity</h3>
+<li class="checkboxlist clearfix">
+    <?php 
+        $i = 0;
+        foreach ($issueNames as $issueName) {
+            echo '<div><input type="checkbox" id="' . $issueName 
+            . '" name="' . Deblank($issueName)
+            . '" value="' . $issueName 
+            . '"> <label class="cbox" for="' .  $issueName 
+            . '">' . $issueName .  "</label></div>";
+        }
+    ?>
+</li>
+<br />
 <li class="form-button">
     <input type="submit" />
 </li>
