@@ -3,7 +3,7 @@
 --                                                                           -
 -- Numbers refer to use cases for traceability                               -
 --                                                                           -
--- This is NOT meant to be run straight through as a script.                 -
+-- You can run this straight through as a script to populate test data       -
 -- Use these queries as templates for queries submitted through the website. -
 --                                                                           -
 ##############################################################################
@@ -20,25 +20,26 @@
 
 -- 2.5.1 - Create issue
 
-INSERT INTO issue (Name, Description)
-VALUES ('Ageism',''),
-('Air','air quality'),
-('Animal protection','animal welfare, cruelty, vegetarianism, etc.'),
-('Elections',''),
-('Feminism',''),
-('Heterosexism',''),
-('Immigration',''),
-('Indigenous','Welfare and rights of indigenous, native and first nations people'),
-('Islamophobia',''),
-('Land','Political and economic constraints on land use'),
-('LGBTQAA+',''),
-('Other',''),
-('Permaculture','Care for the earth, care for the people, share the surplus'),
-('Religious persecution',''),
-('Sustainable farming',''),
-('Trans rights',''),
-('Water','') ,
-('Climate change','')
+INSERT INTO issue (Name, Description, OriginatorName, OriginatorEmail, OriginatorPhone, ApprovalStatus, StatusReason)
+VALUES ('Ageism','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Air','air quality','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Animal protection','animal welfare, cruelty, vegetarianism, etc.','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Elections','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Feminism','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Heterosexism','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Immigration','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Indigenous','Welfare and rights of indigenous, native and first nations people','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Islamophobia','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Land','Legal and economic constraints on land use','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('LGBTQAA+','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Other','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Permaculture','Care for the earth, care for the people, share the surplus','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Religious persecution','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Sustainable farming','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Trans rights','','System','bmeacham@bmeacham.com','512-470-4606','Approved',''),
+('Water','','System','bmeacham@bmeacham.com','512-470-4606','Approved','') ,
+('Climate change','','System','bmeacham@bmeacham.com','512-470-4606','Approved','') ,
+('Homelessness','','System','bmeacham@bmeacham.com','512-470-4606','Approved','')
 ;
 
 
@@ -51,8 +52,8 @@ UPDATE issue
 
 -- 2.5.3 - Delete issue
 
-DELETE FROM issue
- WHERE Name = 'Ageism' ;
+-- DELETE FROM issue
+-- WHERE Name = 'Ageism' ;
 
 
 -- --------------------------
@@ -80,8 +81,11 @@ INSERT INTO kgroup VALUES (
 'WA',
 '98101',
 'USA',
-47.493816 ,
--122.306862
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
+''
 );
 
 INSERT INTO kgroup VALUES (
@@ -101,8 +105,11 @@ INSERT INTO kgroup VALUES (
 'WA',
 '98101',
 'USA',
-0,
-0
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
+''
 );
 
 INSERT INTO kgroup VALUES (
@@ -122,8 +129,11 @@ INSERT INTO kgroup VALUES (
 '',
 '',
 '',
-30.149748 ,
--97.814468
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
+''
 );
 
 -- 2.4.2 - Update action group
@@ -135,8 +145,8 @@ UPDATE kgroup
 
 -- 2.4.3 - Delete action group
 
-DELETE FROM kgroup 
-   WHERE Name = "Org3";
+-- DELETE FROM kgroup 
+--   WHERE Name = "Org3";
 
 
 
@@ -171,8 +181,8 @@ INSERT INTO groupissue (GroupName, issueName) VALUES
 
 -- Delete from groupissue
 
-DELETE FROM groupissue
- WHERE Groupname = 'Org3' ;
+-- DELETE FROM groupissue
+--  WHERE Groupname = 'Org3' ;
 
 
 
@@ -193,34 +203,55 @@ INSERT INTO kevent VALUES (
 'Just a fun group activity involving graham crackers, marshmallows, chocolate and heat',
 '2021-03-01 13:00:00',
 '2021-03-01 15:00:00',
--7 ,
 'PST' ,
+'',
+'',
 'Chuckee Cheese',
 'chuckee@null.org',
 '999-123-4567',
 'No',
 'http://null.com/smores',
 'At the picnic area in Waldorf Park, Bellingham',
+'', # Address1
+'', # Address2
+'', # City
+'', # StateProvince
+'', # PostalCode
+'', # Country
 'In-person',
-'',
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
 ''
 ) ;
 
 INSERT INTO kevent VALUES (
-"Pacific Climate Warriors at the First People's Climate Summit Evening Panel",
+"Pacific Climate Warriors",
 'We invite you to join us at the events and activities 350.org is involved in at Bonn, or contact us for more information and media materials related to these events.',
 '2021-04-02 20:00:00',
 '2021-04-02 22:00:00',
--7 ,
-'PST' ,'Wahhab Baldwin',
+'PST' ,
+'',
+'',
+'Wahhab Baldwin',
 'wahhabb@gmail.com',
 '+1 (206) 973-6751',
 'Yes',
 'https://pcs2017.org/en/evening-panels/',
 'CAMPO Campusmensa Poppelsdorf',
+'', # Address1
+'', # Address2
+'', # City
+'', # StateProvince
+'', # PostalCode
+'', # Country
 'Hybrid',
-47.493816 ,
--122.306862
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
+''
 );
 
 
@@ -229,35 +260,55 @@ INSERT INTO kevent VALUES (
 'We invite you to join us.',
 '2021-04-02 20:00:00',
 '2021-04-02 22:00:00',
--5 ,
 'PST' ,
+'',
+'',
 'Wahhab Baldwin',
 'wahhabb@gmail.com',
 '+1 (206) 973-6751',
 'Yes',
-'',
 'https://us02web.zoom.us/j/84620810012?pwd=MEtVWVdwaDU3eFpoQVA0NnMzQTMrZz09',
+'' ,
+'', # Address1
+'', # Address2
+'', # City
+'', # StateProvince
+'', # PostalCode
+'', # Country
 'Online',
-30.149748 ,
--97.814468
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
+''
 );
 
 INSERT INTO kevent VALUES (
 'Event4',
-'A big fat event',
+'A big fat event that repeats',
 '2021-04-02 20:00:00',
 '2021-04-02 22:00:00',
--5 ,
 'PST' ,
+'Every other week' ,
+'Yes' ,
 'Wahhab Baldwin',
 'wahhabb@gmail.com',
 '+1 (206) 973-6751',
 'Yes',
-'',
 'https://us02web.zoom.us/j/84620810012?pwd=MEtVWVdwaDU3eFpoQVA0NnMzQTMrZz09',
+'' ,
+'', # Address1
+'', # Address2
+'', # City
+'', # StateProvince
+'', # PostalCode
+'', # Country
 'Online',
-30.149748 ,
--97.814468
+'System',
+'bmeacham@bmeacham.com',
+'512-470-4606',
+'Approved',
+''
 );
 
 
@@ -268,8 +319,8 @@ UPDATE kevent SET End = '2021-04-02 22:30:00'
 
 -- 2.3.3 - Delete events
 
-DELETE FROM kevent
- WHERE Name = 'Event3' ;
+-- DELETE FROM kevent
+--  WHERE Name = 'Event3' ;
 
 
 -- ---------------------------------------------------
@@ -282,19 +333,22 @@ DELETE FROM kevent
 -- 
 -- ---------------------------------------------------
 
-INSERT INTO groupevent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName,PrimaryGroup) VALUES (
 'Org1',
-"Eating S'Mores"
+"Eating S'Mores",
+'Yes'
 ) ;
 
-INSERT INTO groupevent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName,PrimaryGroup) VALUES (
 'Org3',
-"Eating S'Mores"
+"Eating S'Mores",
+'No'
 ) ;
 
-INSERT INTO groupevent (GroupName,EventName) VALUES (
+INSERT INTO groupevent (GroupName,EventName,PrimaryGroup) VALUES (
 'Org2',
-"Pacific Climate Warriors at the First People's Climate Summit Evening Panel"
+"Pacific Climate Warriors" ,
+''
 ) ;
 
 INSERT INTO groupevent (GroupName,EventName) VALUES (
@@ -318,8 +372,8 @@ INSERT INTO groupevent (GroupName,EventName) VALUES (
 
 -- Delete from groupevent
 
-DELETE FROM groupevent
- WHERE Groupname = 'Org3' ;
+-- DELETE FROM groupevent
+--  WHERE Groupname = 'Org3' ;
 
 
 -- ---------------------------------------------------
@@ -343,7 +397,7 @@ INSERT INTO Eventissue (EventName,issueName) VALUES (
 ) ;
 
 INSERT INTO Eventissue (EventName,issueName) VALUES (
-"Pacific Climate Warriors at the First People's Climate Summit Evening Panel",
+"Pacific Climate Warriors",
 'Climate Change'
 ) ;
 
