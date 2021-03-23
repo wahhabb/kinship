@@ -348,7 +348,7 @@ INSERT INTO groupevent (GroupName,EventName,PrimaryGroup) VALUES (
 INSERT INTO groupevent (GroupName,EventName,PrimaryGroup) VALUES (
 'Org2',
 "Pacific Climate Warriors" ,
-''
+NUll
 ) ;
 
 INSERT INTO groupevent (GroupName,EventName) VALUES (
