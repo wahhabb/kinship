@@ -386,32 +386,32 @@ INSERT INTO groupevent (GroupName,EventName) VALUES (
 -- 
 -- ---------------------------------------------------
 
-INSERT INTO Eventissue (EventName,issueName) VALUES (
+INSERT INTO eventissue (EventName,issueName) VALUES (
 "Eating S'Mores",
 'Elections'
 ) ;
 
-INSERT INTO Eventissue (EventName,issueName) VALUES (
+INSERT INTO eventissue (EventName,issueName) VALUES (
 "Eating S'Mores",
 'Feminism'
 ) ;
 
-INSERT INTO Eventissue (EventName,issueName) VALUES (
+INSERT INTO eventissue (EventName,issueName) VALUES (
 "Pacific Climate Warriors",
 'Climate Change'
 ) ;
 
-INSERT INTO Eventissue (EventName,issueName) VALUES (
+INSERT INTO eventissue (EventName,issueName) VALUES (
 'Event3',
 'Indigenous'
 ) ;
 
-INSERT INTO Eventissue (EventName,issueName) VALUES (
+INSERT INTO eventissue (EventName,issueName) VALUES (
 'Event3',
 'Land'
 ) ;
 
-INSERT INTO Eventissue (EventName,issueName) VALUES (
+INSERT INTO eventissue (EventName,issueName) VALUES (
 'Event4',
 'Land'
 ) ;
