@@ -125,10 +125,10 @@ INSERT INTO kgroup VALUES (
 'Yes',
 '',
 '',
-'',
-'',
-'',
-'',
+'Nelson',
+'BC',
+'V1L 1B2',
+'Canada',
 'System',
 'bmeacham@bmeacham.com',
 '512-470-4606',
@@ -214,10 +214,10 @@ INSERT INTO kevent VALUES (
 'At the picnic area in Waldorf Park, Bellingham',
 '', # Address1
 '', # Address2
-'', # City
-'', # StateProvince
+'Bellingham', # City
+'WA', # StateProvince
 '', # PostalCode
-'', # Country
+'USA', # Country
 'In-person',
 'System',
 'bmeacham@bmeacham.com',
@@ -242,10 +242,10 @@ INSERT INTO kevent VALUES (
 'CAMPO Campusmensa Poppelsdorf',
 '', # Address1
 '', # Address2
-'', # City
-'', # StateProvince
+'Seattle', # City
+'WA', # StateProvince
 '', # PostalCode
-'', # Country
+'USA', # Country
 'Hybrid',
 'System',
 'bmeacham@bmeacham.com',
@@ -268,13 +268,13 @@ INSERT INTO kevent VALUES (
 '+1 (206) 973-6751',
 'Yes',
 'https://us02web.zoom.us/j/84620810012?pwd=MEtVWVdwaDU3eFpoQVA0NnMzQTMrZz09',
-'' ,
+'Big Orange Bridge' ,
 '', # Address1
 '', # Address2
-'', # City
-'', # StateProvince
+'Nelson', # City
+'BC', # StateProvince
 '', # PostalCode
-'', # Country
+'Canada', # Country
 'Online',
 'System',
 'bmeacham@bmeacham.com',
@@ -296,13 +296,13 @@ INSERT INTO kevent VALUES (
 '+1 (206) 973-6751',
 'Yes',
 'https://us02web.zoom.us/j/84620810012?pwd=MEtVWVdwaDU3eFpoQVA0NnMzQTMrZz09',
-'' ,
+'Butchart Gardens' ,
 '', # Address1
 '', # Address2
-'', # City
-'', # StateProvince
+'Vancouver', # City
+'BC', # StateProvince
 '', # PostalCode
-'', # Country
+'Canada', # Country
 'Online',
 'System',
 'bmeacham@bmeacham.com',

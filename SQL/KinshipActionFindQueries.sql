@@ -34,7 +34,14 @@ SELECT kevent.Name, kevent.Description
  
  
 -- 2.1.1.b Search for events by country
--- Need to join with kgroup table for country
+
+SELECT Name, Location from kevent
+ WHERE Country = 'Canada' ;
+
+-- If some events don't have country, you can
+-- join with kgroup table for country
+-- NOTE: This won't give accurate results if the event is not
+-- located where the group is.
 
 -- get event name
 -- using inner join
@@ -52,9 +59,15 @@ SELECT distinct kevent.Name, kevent.Location
    AND kevent.Name = groupevent.EventName ;
 
 
-
 -- 2.1.1.c Search for events by state
--- Need to join with kgroup table for state
+
+SELECT Name, Location from kevent
+ WHERE StateProvince = 'BC' ;
+
+-- If some events don't have state, you can
+-- join with kgroup table for state
+-- NOTE: This won't give accurate results if the event is not
+-- located where the group is.
 
 -- get event name
 SELECT distinct kevent.Name, kevent.Location
@@ -71,9 +84,16 @@ SELECT distinct kevent.Name, kevent.Location
    AND kevent.Name = groupevent.EventName ;
 
 
-
 -- 2.1.1.d Search for events by city
--- Need to join with kgroup table for city
+
+SELECT Name, Location from kevent
+ WHERE City = 'Nelson' ;
+
+
+-- If some events don't have city, you can
+-- join with kgroup table for city
+-- NOTE: This won't give accurate results if the event is not
+-- located where the group is.
 
 -- get event name
 SELECT distinct kevent.Name, kevent.Location
@@ -104,7 +124,7 @@ SELECT Name, Begin, End from kevent
 
 -- 2.1.1.f Search for events by action group
 
--- To get event name only, we just look at groupevent ;
+-- To get event name only, we just look at groupevent
 SELECT EventName
   FROM groupevent
  Where GroupName = 'Org1' ;
@@ -201,12 +221,12 @@ SELECT Name, Description
  
 -- 2.2.1.f Find all groups that sponsor a specific event 
 
-SELECT kgroup.Name, kgroup.Description
+SELECT kgroup.Name, kgroup.Description, groupevent.PrimaryGroup
   FROM kgroup, groupevent
  WHERE kgroup.Name = groupevent.GroupName
    AND groupevent.EventName = "Eating S'Mores" ;
 
-SELECT kgroup.Name, kgroup.Description
+SELECT kgroup.Name, kgroup.Description, groupevent.PrimaryGroup
   FROM kgroup INNER JOIN groupevent ON kgroup.Name = groupevent.GroupName
  WHERE groupevent.EventName = "Eating S'Mores" ;
 
@@ -228,6 +248,4 @@ SELECT issueName from groupissue
 SELECT Name, Description FROM issue
  INNER JOIN groupissue ON issue.Name = groupissue.issueName
  WHERE groupissue.GroupName = 'Org1' ;
-
-
 
